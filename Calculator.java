@@ -19,6 +19,7 @@ public class Calculator extends MIDlet implements CommandListener {
     private Form main;
     private Form operation;
     private Command exit;
+    private Command clear;
     private Command select;
     private Command back;
     private Command result;
@@ -50,13 +51,13 @@ public class Calculator extends MIDlet implements CommandListener {
         select = new Command("SELECT",Command.OK,0);
         back = new Command("BACK",Command.BACK,0);
         result = new Command("RESULT",Command.OK,0);
-        
+        clear = new Command("CLEAR",Command.OK,0);
         //Adding command buttons to different forms
         main.addCommand(exit);
         main.addCommand(select);
         operation.addCommand(result);
         operation.addCommand(back);
-        
+        operation.addCommand(clear);
         main.setCommandListener(this);
         operation.setCommandListener(this);
         
@@ -98,6 +99,17 @@ public class Calculator extends MIDlet implements CommandListener {
             if(c==back)
             {
                 display.setCurrent(main);
+            }
+            if(c==clear)
+            {
+                operation.deleteAll();
+                a = new TextField("Enter First Number","",40,TextField.DECIMAL);
+                b = new TextField("Enter Second Number","",40,TextField.DECIMAL);
+                f = new TextField("Result","",40,TextField.DECIMAL);
+                operation.append(a);
+                operation.append(b);
+                operation.append(f);
+                display.setCurrent(operation);
             }
             else if(c==result)
             {
